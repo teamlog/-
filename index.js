@@ -7,7 +7,7 @@ var app = express();
 //var client_secret = 'A3VqfyXvR1';
 app.use(bp.urlencoded({ extended : false }));
 app.get('/', function (req, res){
-  res.sendFile(__dirname + `/source/index.html`);
+  res.sendFile(__dirname + `/source/post.html`);
 })
 app.post('/', function (req, res) {
   var qryx = [req.body.query1x*1, req.body.query2x*1, req.body.query3x*1];
@@ -36,15 +36,6 @@ app.post('/', function (req, res) {
     }
     res.send(lst);
   }, 500);
-  //res.send(rst);
-  /*rst = rst.result;
-  //res.send(rst);
-  var lst = []
-  for (var i = 0; i < rst.count; i++){
-    lst.push([rst.station[i].stationName, rst.station[i].x, rst.station[i].y]);
-  }
-  res.send(lst);*/
-  //res.send([xvg, yvg]);
 });
 app.listen(3000,function(){
   console.log(`Server is running!`);
