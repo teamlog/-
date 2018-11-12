@@ -9,6 +9,9 @@ app.use(bp.urlencoded({ extended : false }));
 app.get('/', function (req, res){
   res.sendFile(__dirname + `/source/post.html`);
 })
+app.get('/map', function(req, res){
+  res.sendFile(__dirname + '/source/map.html');
+})
 app.post('/', function (req, res) {
   var qryx = [req.body.query1x*1, req.body.query2x*1, req.body.query3x*1];
   var qryy = [req.body.query1y*1, req.body.query2y*1, req.body.query3y*1];
