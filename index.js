@@ -5,6 +5,7 @@ var odysaykey = 'atfxVlgusoHTkxTFXa%2FlajJwZ%2B5qeO9sqHe%2FpOMkpBk';
 var app = express();
 //var client_id = 'HidmRTMmZoMwdG4DJAPw';
 //var client_secret = 'A3VqfyXvR1';
+app.use(express.static('source'));
 app.use(bp.urlencoded({ extended : false }));
 app.get('/', function (req, res){
   res.sendFile(__dirname + `/source/post.html`);
