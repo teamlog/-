@@ -3,31 +3,23 @@ var bp = require('body-parser');
 var rqst = require('request');
 var odysaykey = 'atfxVlgusoHTkxTFXa%2FlajJwZ%2B5qeO9sqHe%2FpOMkpBk';
 var app = express();
+
+var queryx = [], queryy = [];
+var xvg, yvg;
+
 //var client_id = 'HidmRTMmZoMwdG4DJAPw';
 //var client_secret = 'A3VqfyXvR1';
 app.use(express.static('source'));
 app.use(bp.urlencoded({ extended : false }));
 app.get('/', function (req, res){
   res.sendFile(__dirname + `/source/post.html`);
-})
-<<<<<<< HEAD
+});
 
-app.post('/result', function (req, res) {
-=======
-app.get('/map', function(req, res){
-  res.sendFile(__dirname + '/source/map.html');
-})
-app.post('/', function (req, res) {
->>>>>>> 1444908034e2a787b0f115c1578efb91424baaf8
-  var qryx = [req.body.query1x*1, req.body.query2x*1, req.body.query3x*1];
-  var qryy = [req.body.query1y*1, req.body.query2y*1, req.body.query3y*1];
-  var xvg = 0, yvg = 0;
-  for (var i = 0; i < qryx.length; i++){
-    xvg += qryx[i];
-    yvg += qryy[i];
+app.get('/result', function (req, res) {
+  for (var i = 0; i < queryx.length; i++){
+    xvg += queryx[i]*1;
+    yvg += queryy[i]*1;
   }
-  xvg /= qryx.length;
-  yvg /= qryy.length;
   xvg = 126.9670558;
   yvg = 37.5428137;
   var rst;
@@ -38,7 +30,6 @@ app.post('/', function (req, res) {
 
 
   setTimeout(function(){
-    console.log(rst);
     rst = rst.result;
     //res.send(rst);
     var lst = []
@@ -48,7 +39,54 @@ app.post('/', function (req, res) {
     res.send(lst);
   }, 500);
 });
+app.get('/map', function(req, res){
+  res.sendFile(__dirname + '/source/map.html');
+});
+
+app.get('/1', function(req, res){
+  res.sendFile(__dirname + '/source/page_1.html');
+});
+
+app.get('/2', function(req, res){
+  res.sendFile(__dirname + '/source/page_2.html');
+});
+
+app.post('/', function(req, res){
+  while (queryx.length > 0){
+    queryx.pop();
+    queryy.pop();
+  }
+  xvg = 0;
+  yvg = 0;
+  queryx.push(req.body.x);
+  queryy.push(req.body.y);
+  res.redirect('/1');
+});
+
+app.post('/1', function(req, res){
+  while (queryx.length > 1){
+    queryx.pop();
+    queryy.pop();
+  }
+  xvg = 0;
+  yvg = 0;
+  queryx.push(req.body.x);
+  queryy.push(req.body.y);
+  res.redirect('/2');
+});
+
+app.post('/2', function (req, res) {
+  while (queryx.length > 2){
+    queryx.pop();
+    queryy.pop();
+  }
+  xvg = 0;
+  yvg = 0;
+  queryx.push(req.body.x);
+  queryy.push(req.body.y);
+  res.redirect('/result');
+});
 
 app.listen(3000,function(){
   console.log(`Server is running!`);
-})
+});
