@@ -26,8 +26,10 @@ app.get('/result', function (req, res) {
     xvg += queryx[i]*1;
     yvg += queryy[i]*1;
   }
-  xvg = 126.9670558;
-  yvg = 37.5428137;
+  xvg /= queryx.length;
+  yvg /= queryy.length;
+  //xvg = 126.9670558;
+  //yvg = 37.5428137;
   var rst;
   rqst(`https://api.odsay.com/v1/api/pointSearch?lang=0&x=${xvg}&y=${yvg}&radius=600&stationClass=2&apiKey=${odysaykey}`, function(err, response, body){
     rst = JSON.parse(body);
@@ -37,7 +39,6 @@ app.get('/result', function (req, res) {
 
   setTimeout(function(){
     rst = rst.result;
-    //res.send(rst);
     var lst = []
     for (var i = 0; i < rst.count; i++){
       lst.push([rst.station[i].stationName, rst.station[i].x, rst.station[i].y]);
@@ -66,7 +67,6 @@ app.get('/2', function(req, res){
 });
 
 app.post('/', function(req, res){
-
   queryx.push(req.body.x);
   queryy.push(req.body.y);
   res.redirect('/1');
