@@ -5,12 +5,20 @@ var odysaykey = 'atfxVlgusoHTkxTFXa%2FlajJwZ%2B5qeO9sqHe%2FpOMkpBk';
 var app = express();
 //var client_id = 'HidmRTMmZoMwdG4DJAPw';
 //var client_secret = 'A3VqfyXvR1';
+app.use(express.static('source'));
 app.use(bp.urlencoded({ extended : false }));
 app.get('/', function (req, res){
   res.sendFile(__dirname + `/source/post.html`);
 })
+<<<<<<< HEAD
 
 app.post('/result', function (req, res) {
+=======
+app.get('/map', function(req, res){
+  res.sendFile(__dirname + '/source/map.html');
+})
+app.post('/', function (req, res) {
+>>>>>>> 1444908034e2a787b0f115c1578efb91424baaf8
   var qryx = [req.body.query1x*1, req.body.query2x*1, req.body.query3x*1];
   var qryy = [req.body.query1y*1, req.body.query2y*1, req.body.query3y*1];
   var xvg = 0, yvg = 0;
