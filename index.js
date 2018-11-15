@@ -12,6 +12,12 @@ var xvg, yvg;
 app.use(express.static('source'));
 app.use(bp.urlencoded({ extended : false }));
 app.get('/', function (req, res){
+  while (queryx.length > 0){
+    queryx.pop();
+    queryy.pop();
+  }
+  xvg = 0;
+  yvg = 0;
   res.sendFile(__dirname + `/source/post.html`);
 });
 
@@ -44,44 +50,35 @@ app.get('/map', function(req, res){
 });
 
 app.get('/1', function(req, res){
+  while (queryx.length > 1){
+    queryx.pop();
+    queryy.pop();
+  }
   res.sendFile(__dirname + '/source/page_1.html');
 });
 
 app.get('/2', function(req, res){
+  while (queryx.length > 2){
+    queryx.pop();
+    queryy.pop();
+  }
   res.sendFile(__dirname + '/source/page_2.html');
 });
 
 app.post('/', function(req, res){
-  while (queryx.length > 0){
-    queryx.pop();
-    queryy.pop();
-  }
-  xvg = 0;
-  yvg = 0;
+
   queryx.push(req.body.x);
   queryy.push(req.body.y);
   res.redirect('/1');
 });
 
 app.post('/1', function(req, res){
-  while (queryx.length > 1){
-    queryx.pop();
-    queryy.pop();
-  }
-  xvg = 0;
-  yvg = 0;
   queryx.push(req.body.x);
   queryy.push(req.body.y);
   res.redirect('/2');
 });
 
 app.post('/2', function (req, res) {
-  while (queryx.length > 2){
-    queryx.pop();
-    queryy.pop();
-  }
-  xvg = 0;
-  yvg = 0;
   queryx.push(req.body.x);
   queryy.push(req.body.y);
   res.redirect('/result');
