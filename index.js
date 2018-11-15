@@ -9,7 +9,8 @@ app.use(bp.urlencoded({ extended : false }));
 app.get('/', function (req, res){
   res.sendFile(__dirname + `/source/post.html`);
 })
-app.post('/', function (req, res) {
+
+app.post('/result', function (req, res) {
   var qryx = [req.body.query1x*1, req.body.query2x*1, req.body.query3x*1];
   var qryy = [req.body.query1y*1, req.body.query2y*1, req.body.query3y*1];
   var xvg = 0, yvg = 0;
@@ -26,6 +27,8 @@ app.post('/', function (req, res) {
     rst = JSON.parse(body);
     //res.send(body);
   });
+
+
   setTimeout(function(){
     console.log(rst);
     rst = rst.result;
@@ -37,6 +40,7 @@ app.post('/', function (req, res) {
     res.send(lst);
   }, 500);
 });
+
 app.listen(3000,function(){
   console.log(`Server is running!`);
 })
