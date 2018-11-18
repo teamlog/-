@@ -118,7 +118,7 @@
   </script>
 
 <form action='/2' method='post'>
-  <input type="text" id="x" name="query3x" readonly="" style="
+  <input type="text" id="x" name="x" readonly="" value="" style="
     width: 0px;
     height: 0px;
     border:none;
@@ -126,9 +126,9 @@
     border-top:0px;
     boder-left:0px;
     boder-bottom:0px;
-">
+  ">
 
-  <input type="text" id="y" name="query3y" readonly="" style="
+  <input type="text" id="y" name="y" readonly="" value="" style="
     border:none;
     border-right:0px;
     border-top:0px;
@@ -136,7 +136,7 @@
     boder-bottom:0px;
     width: 0px;
     height: 0px;
-">
+  ">
   <div id="div_page" style="padding:0px 210px 0px 210px">
     <div id="div_title" align="center">
       <font style="font-size:100pt; font-weight:bold;">Where Meet</font>
@@ -236,8 +236,8 @@
                           // 해당 주소에 대한 좌표를 받아서
                           var coords = new daum.maps.LatLng(result.y, result.x);
 
-                          document.getElementById("x").value = result.x
-                          document.getElementById("y").value = result.y;
+                          document.getElementById("x").value = result.address.x;
+                          document.getElementById("y").value = result.address.y;
                           // 지도를 보여준다.
                           mapContainer.style.display = "block";
                           map.relayout();

@@ -117,7 +117,7 @@
   </script>
 
   <form action='/' method='post'>
-    <input type="text" id="x" name="query1x" readonly="" style="
+    <input type="text" id="x" name="x" readonly="" value="" style="
     width: 0px;
     height: 0px;
     border:none;
@@ -127,7 +127,7 @@
     boder-bottom:0px;
 ">
 
-  <input type="text" id="y" name="query1y" readonly="" style="
+  <input type="text" id="y" name="y" readonly="" value="" style="
     border:none;
     border-right:0px;
     border-top:0px;
@@ -230,13 +230,15 @@
                       // 정상적으로 검색이 완료됐으면
                       if (status === daum.maps.services.Status.OK) {
 
-                          var result = results[0]; //첫번째 결과의 값을 활용
+                          var result = results[0]; //첫번째 결과의 값을 활용zzz
+
+                          //console.log(result.address.x);
 
                           // 해당 주소에 대한 좌표를 받아서
                           var coords = new daum.maps.LatLng(result.y, result.x);
 
-                          document.getElementById("x").value = result.x;
-                          document.getElementById("y").value = result.y;
+                          document.getElementById("x").value = result.address.x;
+                          document.getElementById("y").value = result.address.y;
                           // 지도를 보여준다.
                           mapContainer.style.display = "block";
                           map.relayout();
