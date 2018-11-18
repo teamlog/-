@@ -20,7 +20,7 @@ app.get('/', function (req, res){
   }
   xvg = 0;
   yvg = 0;
-  res.render('post');
+  res.render('page_1');
 });
 
 app.get('/result', function (req, res) {
@@ -70,7 +70,7 @@ app.get('/1', function(req, res){
     queryx.pop();
     queryy.pop();
   }
-  res.render('page_1');
+  res.render('page_2');
 });
 
 app.get('/2', function(req, res){
@@ -78,7 +78,7 @@ app.get('/2', function(req, res){
     queryx.pop();
     queryy.pop();
   }
-  res.render('page_2');
+  res.render('page_3');
 });
 
 app.post('/', function(req, res){

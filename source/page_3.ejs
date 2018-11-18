@@ -110,14 +110,15 @@
 </head>
 
 <body>
+
   <script type="text/javascript">
   function go_page2(){
-    location.href="page_2.html";
+    location.href="/";
   }
   </script>
 
-  <form action='/' method='post'>
-    <input type="text" id="x" name="query1x" readonly="" style="
+<form action='/2' method='post'>
+  <input type="text" id="x" name="query3x" readonly="" style="
     width: 0px;
     height: 0px;
     border:none;
@@ -127,7 +128,7 @@
     boder-bottom:0px;
 ">
 
-  <input type="text" id="y" name="query1y" readonly="" style="
+  <input type="text" id="y" name="query3y" readonly="" style="
     border:none;
     border-right:0px;
     border-top:0px;
@@ -136,50 +137,50 @@
     width: 0px;
     height: 0px;
 ">
-    <div id="div_page" style="padding:0px 210px 0px 210px">
-      <div id="div_title" align="center">
-        <font style="font-size:100pt; font-weight:bold;">Where Meet</font>
-      <hr color="black" width="1430px" size="5px" ></div>
-      <div id="div_main" style="padding:0px 59px 0px 59px; display:inline;">
-        <div id="div_color" style="background-color:#4b4c4c; padding:49px 45px 49px 45px; display:inline; float:left;">
-          <div id="div_white" style="background-color:white; display:inline;">
-            <div class="left" style="background-color:white; display:inline; float:left;">
-              <div id="div_name" style="background-color:white; margin:107px 50px 60px 50px">
-                <div class="text_name" style="margin:0px 0px 50px 0px">
-                  <font style="font-size:50pt; font-weight:bold;">NAME</font>
-                </div>
-                <div class="enter_name" style="">
-                  <input type="text" name="name" style="width:100%; height:50px;">
-                </div>
+  <div id="div_page" style="padding:0px 210px 0px 210px">
+    <div id="div_title" align="center">
+      <font style="font-size:100pt; font-weight:bold;">Where Meet</font>
+    <hr color="black" width="1430px" size="5px" ></div>
+    <div id="div_main" style="padding:0px 59px 0px 59px; display:inline;">
+      <div id="div_color" style="background-color:#b7b7b7; padding:49px 45px 49px 45px; display:inline; float:left;">
+        <div id="div_white" style="background-color:white; display:inline;">
+          <div class="left" style="background-color:white; display:inline; float:left;">
+            <div id="div_name" style="background-color:white; margin:107px 50px 60px 50px">
+              <div class="text_name" style="margin:0px 0px 50px 0px">
+                <font style="font-size:50pt; font-weight:bold;">NAME</font>
               </div>
-              <div id="div_address" style="background-color:white; margin:60px 50px 30px 50px">
-                <div class="text_address" style="margin:0px 0px 50px 0px">
-                  <font style="font-size:50pt; font-weight:bold;">ADDRESS</font>
-                </div>
-                <div class="enter_address" style="">
-                  <input type="text" name="address" style="width:100%; height:50px" id="sample5_address" placeholder="주소" onclick="sample5_execDaumPostcode()" readonly>
-                </div>
-              </div>
-              <div class="button_left" style="background-color:black; display:inline; float:left; margin:80px 0px 30px 50px">
-                <input type="button" style="width:100%; height:100%" value="HELP">
-              </div>
-              <div class="button_right" style="background-color:black; display:inline; float:left; margin:80px 0px 30px 44px">
-                <input type="submit" style="width:100%; height:100%" value="NEXT">
+              <div class="enter_name" style="">
+                <input type="text" name="name" style="width:100%; height:50px;">
               </div>
             </div>
-            <div class="right" style="background-color:white; display:inline; float:left;">
-              <div id="div_map" style="background-color:gray; margin:107px 85px 107px 85px"></div>
+            <div id="div_address" style="background-color:white; margin:60px 50px 30px 50px">
+              <div class="text_address" style="margin:0px 0px 50px 0px">
+                <font style="font-size:50pt; font-weight:bold;">ADDRESS</font>
+              </div>
+              <div class="enter_address" style="">
+                  <input type="text" name="address" style="width:100%; height:50px" id="sample5_address" placeholder="주소" onclick="sample5_execDaumPostcode()" readonly>
+              </div>
+            </div>
+            <div class="button_left" style="background-color:black; display:inline; float:left; margin:80px 0px 30px 50px">
+              <input type="button" style="width:100%; height:100%" value="BACK" onclick="go_page2()">
+            </div>
+            <div class="button_right" style="background-color:black; display:inline; float:left; margin:80px 0px 30px 44px">
+              <input type="submit" style="width:100%; height:100%" value="CHECK">
             </div>
           </div>
-        </div>
-        <div id="div_page_button" style="display:inline; float:left;">
-          <div class="person_1" style="background-color:#4b4c4c;"></div>
-          <div class="person_2" style="background-color:#808080;"></div>
-          <div class="person_3" style="background-color:#b7b7b7;"></div>
+          <div class="right" style="background-color:white; display:inline; float:left;">
+            <div id="div_map" style="background-color:gray; margin:107px 85px 107px 85px"></div>
+          </div>
         </div>
       </div>
+      <div id="div_page_button" style="display:inline; float:left;">
+        <div class="person_1" style="background-color:#4b4c4c;"></div>
+        <div class="person_2" style="background-color:#808080;"></div>
+        <div class="person_3" style="background-color:#b7b7b7;"></div>
+      </div>
     </div>
-  </form>
+  </div>
+</form>
 
   <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=baf88814046b5b76cb40dfc91449ee4d&libraries=services"></script>
@@ -235,7 +236,7 @@
                           // 해당 주소에 대한 좌표를 받아서
                           var coords = new daum.maps.LatLng(result.y, result.x);
 
-                          document.getElementById("x").value = result.x;
+                          document.getElementById("x").value = result.x
                           document.getElementById("y").value = result.y;
                           // 지도를 보여준다.
                           mapContainer.style.display = "block";
