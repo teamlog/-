@@ -9,6 +9,8 @@ var xvg, yvg;
 
 //var client_id = 'HidmRTMmZoMwdG4DJAPw';
 //var client_secret = 'A3VqfyXvR1';
+app.set("view engine", "ejs");
+app.set("views", __dirname + "/source");
 app.use(express.static('source'));
 app.use(bp.urlencoded({ extended : false }));
 app.get('/', function (req, res){
@@ -18,36 +20,49 @@ app.get('/', function (req, res){
   }
   xvg = 0;
   yvg = 0;
-  res.sendFile(__dirname + `/source/post.html`);
+  res.render('post');
 });
 
 app.get('/result', function (req, res) {
   for (var i = 0; i < queryx.length; i++){
-    xvg += queryx[i]*1;
-    yvg += queryy[i]*1;
+    xvg += queryx[i];
+    yvg += queryy[i];
   }
   xvg /= queryx.length;
   yvg /= queryy.length;
   //xvg = 126.9670558;
   //yvg = 37.5428137;
   var rst;
-  rqst(`https://api.odsay.com/v1/api/pointSearch?lang=0&x=${xvg}&y=${yvg}&radius=600&stationClass=2&apiKey=${odysaykey}`, function(err, response, body){
+  rqst(`https://api.odsay.com/v1/api/pointSearch?lang=0&x=${xvg}&y=${yvg}&radius=1000&stationClass=2&apiKey=${odysaykey}`, function(err, response, body){
     rst = JSON.parse(body);
-    //res.send(body);
   });
 
 
   setTimeout(function(){
     rst = rst.result;
+    console.log(rst);
+    if (!rst){
+      res.end("Error");
+    }
     var lst = []
     for (var i = 0; i < rst.count; i++){
-      lst.push([rst.station[i].stationName, rst.station[i].x, rst.station[i].y]);
+      lst.push([rst.station[i].x, rst.station[i].y+0.0002]);
     }
-    res.send(lst);
+    //res.send(lst);
+    console.log(lst);
+    output = {
+      xvg : xvg,
+      yvg : yvg,
+      queryx : queryx,
+      queryy : queryy,
+      lst : lst
+    };
+    console.log(output);
+    res.render('result', output);
   }, 500);
 });
 app.get('/map', function(req, res){
-  res.sendFile(__dirname + '/source/map.html');
+  res.render('map');
 });
 
 app.get('/1', function(req, res){
@@ -55,7 +70,7 @@ app.get('/1', function(req, res){
     queryx.pop();
     queryy.pop();
   }
-  res.sendFile(__dirname + '/source/page_1.html');
+  res.render('page_1');
 });
 
 app.get('/2', function(req, res){
@@ -63,27 +78,27 @@ app.get('/2', function(req, res){
     queryx.pop();
     queryy.pop();
   }
-  res.sendFile(__dirname + '/source/page_2.html');
+  res.render('page_2');
 });
 
 app.post('/', function(req, res){
-  queryx.push(req.body.x);
-  queryy.push(req.body.y);
+  queryx.push(req.body.x*1);
+  queryy.push(req.body.y*1);
   res.redirect('/1');
 });
 
 app.post('/1', function(req, res){
-  queryx.push(req.body.x);
-  queryy.push(req.body.y);
+  queryx.push(req.body.x*1);
+  queryy.push(req.body.y*1);
   res.redirect('/2');
 });
 
 app.post('/2', function (req, res) {
-  queryx.push(req.body.x);
-  queryy.push(req.body.y);
+  queryx.push(req.body.x*1);
+  queryy.push(req.body.y*1);
   res.redirect('/result');
 });
 
-app.listen(3000,function(){
+app.listen(3389,function(){
   console.log(`Server is running!`);
 });

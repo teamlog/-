@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Where meet</title>
+
+<style>
+
+  #div_page{
+    width:1920px;
+    height:1080px;
+  }
+
+  #div_title{
+    width:1500px;
+    heigth:225px;
+    font-size:100px;
+  }
+
+  #div_main{
+    width:1500px;
+    height:856px;
+  }
+
+  #div_color {
+    width:1430px;
+    height:738px;
+  }
+
+  #div_white {
+    width:1430px;
+    height:738px;
+  }
+
+  #div_map{
+    width:1430px;
+    height:738px;
+  }
+
+  #div_page_button{
+      width:70px;
+      height:738px;
+  }
+  .person_1{
+    width:100%;
+    height:246px;
+  }
+  .person_2{
+    width:100%;
+    height:246px;
+  }
+  .person_3{
+    width:100%;
+    height:246px;
+  }
+
+  #div_enter{
+    width:500px;
+    height:60px;
+  }
+
+  #div_button{
+    width:230px;
+    height:60px;
+  }
+  .button_left{
+    width:230px;
+    height:80px;
+  }
+  .button_right{
+    width:230px;
+    height:80px;
+  }
+
+  #div_name{
+    width:500px;
+    height:120px;
+  }
+  .text_name{
+    width:100%;
+    height:35px;
+  }
+  .enter_name{
+    width:100%;
+    height:35px;
+  }
+
+  #div_address{
+    width:500px;
+    height:120px;
+  }
+  .text_address{
+    width:100%;
+    height:35px;
+  }
+  .enter_address{
+    width:100%;
+    height:35px;
+  }
+
+</style>
+</head>
+
+<body>
+
+  <div id="div_page" style="padding:0px 210px 0px 210px">
+    <div id="div_title" align="center">
+      <font style="font-size:100pt; font-weight:bold;">Where Meet</font>
+    <hr color="black" width="1430px" size="5px" ></div>
+    <div id="div_main" style="padding:0px 59px 0px 59px; display:inline;">
+      <div id="div_color" style="background-color:#4b4c4c; padding:49px 45px 49px 45px; display:inline; float:left;">
+        <div id="div_white" style="background-color:white; display:inline;">
+          <div id="div_map" style="background-color:gray;"></div>
+      </div>
+    </div>
+  </div>
+
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f7fc5bbccef826329a00b3506779a957"></script>
+<script>
+var mapContainer = document.getElementById('div_map'),
+mapOption = {
+  center : new daum.maps.LatLng(<%= yvg %>, <%= xvg %>),
+  level: 3
+}
+
+var map= new daum.maps.Map(mapContainer, mapOption);
+
+var positions = [
+  {
+    title: 'person_1',
+    lating: new daum.maps.LatLng(<%= queryy[0] %>, <%= queryx[0] %>)
+  },
+  {
+    title: 'person_2',
+    lating: new daum.maps.LatLng(<%= queryy[1] %>, <%= queryx[1] %>)
+  },
+  {
+    title: 'person_3',
+    lating: new daum.maps.LatLng(<%= queryy[2] %>, <%= queryx[2] %>)
+  },
+  <% for(var i = 0; i < lst.length ; i++) { %>
+    {
+      title:`station_${i}`,
+      lating: new daum.maps.LatLng(<%= lst[i][1] %>, <%= lst[i][0] %>)
+    },
+  <% } %>
+  {
+    title: 'main',
+    lating: new daum.maps.LatLng(<%= yvg %>, <%= xvg %>)
+  }
+];
+
+var imageSrc = "http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+
+    for(var i = 0; i < positions.length; i++){
+      var imageSize = new daum.maps.Size(24.35);
+      var markerimage = new daum.maps.MarkerImage(imageSrc, imageSize);
+      var marker = new daum.maps.Marker({
+        map: map,
+        position: positions[i].lating,
+        title:positions[i].title,
+        image:markerimage
+      });
+    }
+    </script>
+</body>
+</html>
